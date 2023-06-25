@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.scss';
-
+import {Form} from './Components/Form'
 function App() {
   return (
     <div className="App">
@@ -12,9 +12,7 @@ function App() {
         <div className='content_container'>
           <div className='content'>
           <span >人口數、戶數按戶別及性別統計</span>
-          <form>
-            
-          </form>
+            <Form></Form>
           </div>
         </div>
       </div>
