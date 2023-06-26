@@ -9,6 +9,7 @@ import FilterData from '../Helper/FilterData'
 interface IFormProps {
   setPplData: (data: any) => void;
   setSelectData: (data: any) => void;
+  setDidsubmit: (data: any) => void;
 }
 enum YearSelector {
   Year111 = 'https://od.moi.gov.tw/api/v1/rest/datastore/301000000A-000082-053',
@@ -16,7 +17,7 @@ enum YearSelector {
 }
 
 
-export const Form: FC<IFormProps> = ({setPplData,setSelectData}) => {
+export const Form: FC<IFormProps> = ({setPplData,setSelectData,setDidsubmit}) => {
   // axios.defaults.headers.common['Access-Control-Allow-Origin'] = 'https://od.moi.gov.tw/api/v1/rest/datastore';
   const [year, setYear] = useState<string>('111');
   const [city, setCity] = useState<string>('');
@@ -24,6 +25,7 @@ export const Form: FC<IFormProps> = ({setPplData,setSelectData}) => {
   // const [fetchedData, setFetchedData] = useState<any>(null) 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
+    setDidsubmit((prev:boolean)=>!prev)
     // const allData = await FetchData(year, city, district,fetchedData, setFetchedData)
     // let YY = `Year${year}`  as keyof typeof YearSelector;
     // const allData = await FetchData(YearSelector[YY])

@@ -12,8 +12,8 @@ export const PieChart:React.FC<IChartProps> = ({peopleData}) => {
       // plotBorderWidth: null,
       plotShadow: false,
       type: 'pie',
-      width: 600, // 設置圖表的寬度
-      height: 500
+      // width: 600, // 設置圖表的寬度
+      // height: 500
   },
   title: {
       text: '戶數統計',
@@ -29,6 +29,7 @@ export const PieChart:React.FC<IChartProps> = ({peopleData}) => {
   },
   plotOptions: {
       pie: {
+        size: '110%',
           allowPointSelect: true,
           cursor: 'pointer',
           dataLabels: {
