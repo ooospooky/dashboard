@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './App.scss';
 import { Form } from './Components/Form'
 import { Chart } from './Components/Chart';
+import { PieChart } from './Components/PieChart';
 // import FetchData from './Helper/FetchData'
 function App() {
   // interface IPeopleData {
@@ -37,6 +38,7 @@ function App() {
             <div className='content__chart'>
               {selectData.length === 0 ? null : <h2 className='content__chartH2'>{selectData[0]}年 {selectData[1]}{selectData[2]}</h2>}
               {Object.keys(peopleData).length === 0 ? null : <Chart peopleData={peopleData} selectData={selectData} />}
+              <PieChart peopleData={peopleData}/>
             </div>
           </div>
         </div>

@@ -63,7 +63,7 @@ export const Chart: React.FC<IChartProps> = ({ peopleData,selectData}) => {
       //       },
       name: '男性',
       stack: 'Europe',
-      color: '#5d3f9e',
+      color: '#6948a2',
     },
     {
       // specific options for this series instance
@@ -72,13 +72,12 @@ export const Chart: React.FC<IChartProps> = ({ peopleData,selectData}) => {
       data: [Number(peopleData['household_ordinary_f']), Number(peopleData['household_single_f'])],
       name: '女性',
       stack: 'Eurpe',
-      color: '#C29FFF',
+      color: '#b487fe',
     }
     ]
   }
   return (
     <div  >
-      <h2></h2>
       <HighchartsReact
         highcharts={Highcharts}
         options={options}
