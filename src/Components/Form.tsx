@@ -1,35 +1,36 @@
-import React, { useState, FC } from 'react'
+import React, { useState,useCallback, FC } from 'react'
 import './Form.scss'
 import axios from 'axios'
 import { yeardata, citydata, districtdata } from '../Assets/Data'
+import FetchData from '../Helper/FetchData'
+import FilterData from '../Helper/FilterData'
 // "proxy": "https://od.moi.gov.tw/api/v1/rest/datastore",
 // 
-export const Form: FC = () => {
+interface IFormProps {
+  setPplData: (data: any) => void;
+}
+enum YearSelector {
+  Year111 = 'https://od.moi.gov.tw/api/v1/rest/datastore/301000000A-000082-053',
+  Year110 = 'https://od.moi.gov.tw/api/v1/rest/datastore/301000000A-000082-049'
+}
+
+
+export const Form: FC<IFormProps> = ({setPplData}) => {
   // axios.defaults.headers.common['Access-Control-Allow-Origin'] = 'https://od.moi.gov.tw/api/v1/rest/datastore';
-  const gett = () => {
-    //   fetch('https://od.moi.gov.tw/api/v1/rest/datastore/301000000A-000082-020')
-    //     .then((result) => {
-    //       console.log(result)
-    //     })
-    //     .catch((error) => {
-    //       console.log(error)
-    //     })
-    // }
-    axios.get('https://od.moi.gov.tw/api/v1/rest/datastore/301000000A-000082-020')
-      .then((result) => {
-        console.log(result)
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-  }
-  // gett();
   const [year, setYear] = useState<string>('111');
   const [city, setCity] = useState<string>('');
   const [district, setDistrict] = useState<string>('');
-  const handleSubmit = (event: any) => {
+  // const [fetchedData, setFetchedData] = useState<any>(null) 
+  const handleSubmit = async (event: any) => {
     event.preventDefault();
-    console.log(year, city, district)
+    // const allData = await FetchData(year, city, district,fetchedData, setFetchedData)
+    // let YY = `Year${year}`  as keyof typeof YearSelector;
+    // const allData = await FetchData(YearSelector[YY])
+    const allData = await FetchData(year)
+    console.log('alldata',allData)
+    const doneData = await FilterData(allData, city, district);
+  setPplData(doneData);
+    
   }
   const changeArea = async (e: string) => {
     await setCity(e);
