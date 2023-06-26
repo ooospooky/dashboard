@@ -1,9 +1,10 @@
-import React, { useState,useCallback, FC } from 'react'
+import React, { useState, useCallback,useEffect, FC } from 'react'
 import './Form.scss'
 import axios from 'axios'
 import { yeardata, citydata, districtdata } from '../Assets/Data'
 import FetchData from '../Helper/FetchData'
 import FilterData from '../Helper/FilterData'
+
 // "proxy": "https://od.moi.gov.tw/api/v1/rest/datastore",
 // 
 interface IFormProps {
@@ -16,24 +17,48 @@ enum YearSelector {
   Year110 = 'https://od.moi.gov.tw/api/v1/rest/datastore/301000000A-000082-049'
 }
 
-
-export const Form: FC<IFormProps> = ({setPplData,setSelectData,setDidsubmit}) => {
+export const Form: FC<IFormProps> = ({ setPplData, setSelectData, setDidsubmit }) => {
   // axios.defaults.headers.common['Access-Control-Allow-Origin'] = 'https://od.moi.gov.tw/api/v1/rest/datastore';
   const [year, setYear] = useState<string>('111');
   const [city, setCity] = useState<string>('');
   const [district, setDistrict] = useState<string>('');
+  
+  const pattern = /^\/\d{3}\/[\u4e00-\u9fa5]{3}\/[\u4e00-\u9fa5]{3}$/; 
+  const path = decodeURIComponent(window.location.pathname)
+  useEffect(() => {
+    const urlFetch = async () => {
+      if (pattern.test(path)) {
+        setDidsubmit(true)
+        console.log('yeeeeeee')
+        const pathData = path.split("/").filter(Boolean);
+        console.log(pathData)
+        setYear(pathData[0])
+        setCity(pathData[1])
+        setDistrict(pathData[2])
+        
+        const allData = await FetchData(pathData[0])
+        console.log('alldata', allData)
+        const doneData = await FilterData(allData, pathData[1], pathData[2]);
+        setPplData(doneData);
+        setSelectData([pathData[0], pathData[1], pathData[2]]);
+      }
+    }
+    urlFetch();
+  }, []);
+  // console.log(decodeURIComponent(window.location.pathname))
   // const [fetchedData, setFetchedData] = useState<any>(null) 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
-    setDidsubmit((prev:boolean)=>!prev)
-    // const allData = await FetchData(year, city, district,fetchedData, setFetchedData)
-    // let YY = `Year${year}`  as keyof typeof YearSelector;
-    // const allData = await FetchData(YearSelector[YY])
+    setSelectData([])
+    setPplData({})
+    setDidsubmit(false)
+    setDidsubmit(true)
+    // setDidsubmit((prev: boolean) => !prev)
     const allData = await FetchData(year)
-    console.log('alldata',allData)
+    console.log('alldata', allData)
     const doneData = await FilterData(allData, city, district);
-  setPplData(doneData);
-    setSelectData([year,city,district]);
+    setPplData(doneData);
+    setSelectData([year, city, district]);
   }
   const changeArea = async (e: string) => {
     await setCity(e);
@@ -42,7 +67,7 @@ export const Form: FC<IFormProps> = ({setPplData,setSelectData,setDidsubmit}) =>
   return (
     <form className='dashboardForm' onSubmit={handleSubmit}>
 
-      <select className='dashboardForm__select dashboardForm__selectYear' value={year} onChange={(e) => setYear(e.target.value)}>
+      <select className='dashboardForm__selectYear' value={year} onChange={(e) => setYear(e.target.value)}>
 
         {yeardata.map((data) => {
           return (

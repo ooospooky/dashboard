@@ -17,7 +17,7 @@ function App() {
   const [selectData, setSelectData] = useState([])
   const [changeChart, setChangeChart] = useState(false)
   const [didsubmit, setDidsubmit] = useState(false)
-  console.log("ppp", peopleData)
+  console.log("ppp", didsubmit)
   return (
     <div className="App">
       <div className="navbar">

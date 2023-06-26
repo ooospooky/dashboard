@@ -6,6 +6,7 @@ interface IChartProps {
   peopleData: IPeopleData;
 }
 export const PieChart:React.FC<IChartProps> = ({peopleData}) => {
+  const chartSize = window.innerWidth >=520 ? '110%' : '60%';
   const options: Highcharts.Options = {
     chart: {
       // plotBackgroundColor: null,
@@ -29,7 +30,7 @@ export const PieChart:React.FC<IChartProps> = ({peopleData}) => {
   },
   plotOptions: {
       pie: {
-        size: '110%',
+        size: chartSize,
           allowPointSelect: true,
           cursor: 'pointer',
           dataLabels: {

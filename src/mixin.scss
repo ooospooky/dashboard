@@ -1,0 +1,5 @@
+@mixin respond($breakpoint){
+  @if $breakpoint == iphoneXR{               // width < 600?   
+    @media (max-width: 414px) { @content};    
+  }
+}
