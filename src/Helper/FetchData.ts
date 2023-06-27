@@ -20,10 +20,6 @@ const FetchData=(year:string) =>{
   return( axios.get(YearSelector[year])
     .then((result) => {
       return result.data.result.records;
-      // console.log(result.data.result.records)
-      // console.log(result.data.result.records.find((obj: any) => (obj as Record).village === district))
-      // const targetObject = result.data.result.records.filter((obj:any)=>obj.site_id==="桃園市中壢區")
-      // return targetObject
     })
     .catch((error) => {
       console.log(error)
