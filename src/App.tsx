@@ -4,21 +4,11 @@ import { Form } from './Components/Form'
 import { Chart } from './Components/Chart';
 import { PieChart } from './Components/PieChart';
 import settingSVG  from './Assets/Vector.svg'
-// import FetchData from './Helper/FetchData'
 function App() {
-  // interface IPeopleData {
-  //   'household_ordinary_m':string,
-  //    'household_ordinary_f': string,
-  //   'household_single_f': string,
-  //   'household_single_m': string,
-  //   'household_ordinary_total': string,
-  //   'household_single_total':string
-  // }
   const [peopleData, setPeopleData] = useState({})
   const [selectData, setSelectData] = useState([])
   const [changeChart, setChangeChart] = useState(false)
   const [didsubmit, setDidsubmit] = useState(false)
-  // console.log("ppp", didsubmit)
   return (
     <div className="App">
       <div className="navbar">
@@ -48,8 +38,6 @@ function App() {
                 null :
                 changeChart ? <PieChart peopleData={peopleData} />
                   : <Chart peopleData={peopleData} selectData={selectData} />}
-              {/* <PieChart peopleData={peopleData} /> */}
-
             </div>
           </div>
         </div>

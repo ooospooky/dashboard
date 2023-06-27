@@ -15,8 +15,6 @@
   justify-content: space-between;
   align-items: center;
   &__setting{
-    // width:16px;
-    // height:16px;
     padding: 0.625rem .8rem;
     border-radius: 8px;
     border: 1px solid rgba(255, 255, 255, 0.30);
@@ -34,7 +32,6 @@
 .brand {
   min-width: 10%;
   height: 100%;
-  // position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -97,10 +94,6 @@
   &:first-child{
     gap:.6rem;
   }
-  // &:nth-child(1),
-  // &:nth-child(1){
-  //   gap: 3rem;
-  // }
   @media(max-width:1070px) {
     width: 95%;
   }
