@@ -16,7 +16,6 @@ const YearSelector:IYearSelect = {
 }
 
 const FetchData=(year:string) =>{
-  console.log("YYER",year)
   return( axios.get(YearSelector[year])
     .then((result) => {
       return result.data.result.records;
