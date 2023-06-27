@@ -22,7 +22,7 @@ function App() {
   return (
     <div className="App">
       <div className="navbar">
-        <span>test</span>
+        <span>test2</span>
         <img className="navbar__setting" src={settingSVG} alt='setting' />
       </div>
       <div className='container'>
