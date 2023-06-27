@@ -4,9 +4,6 @@ import axios from 'axios'
 import { yeardata, citydata, districtdata } from '../Assets/Data'
 import FetchData from '../Helper/FetchData'
 import FilterData from '../Helper/FilterData'
-
-// "proxy": "https://od.moi.gov.tw/api/v1/rest/datastore",
-// 
 interface IFormProps {
   setPplData: (data: any) => void;
   setSelectData: (data: any) => void;
@@ -35,7 +32,6 @@ export const Form: FC<IFormProps> = ({ setPplData, setSelectData, setDidsubmit }
         setDistrict(pathData[2])
         
         const allData = await FetchData(pathData[0])
-        // console.log('alldata', allData)
         const doneData = await FilterData(allData, pathData[1], pathData[2]);
         setPplData(doneData);
         setSelectData([pathData[0], pathData[1], pathData[2]]);
@@ -43,17 +39,13 @@ export const Form: FC<IFormProps> = ({ setPplData, setSelectData, setDidsubmit }
     }
     urlFetch();
   }, []);
-  // console.log(decodeURIComponent(window.location.pathname))
-  // const [fetchedData, setFetchedData] = useState<any>(null) 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
     setSelectData([])
     setPplData({})
     setDidsubmit(false)
     setDidsubmit(true)
-    // setDidsubmit((prev: boolean) => !prev)
     const allData = await FetchData(year)
-    // console.log('alldata', allData)
     const doneData = await FilterData(allData, city, district);
     setPplData(doneData);
     setSelectData([year, city, district]);
