@@ -9,7 +9,6 @@ interface IChartProps {
 }
 
 export const Chart: React.FC<IChartProps> = ({ peopleData,selectData}) => {
-  console.log('ffdsfds', peopleData)
   const options: Highcharts.Options = {
     chart: {
       type: 'column'
@@ -49,24 +48,15 @@ export const Chart: React.FC<IChartProps> = ({ peopleData,selectData}) => {
         stacking: 'normal'
       }
     },
-    // series: [{
-    //   type: 'line',
-    //   data: [1, 2, 3]
-    // }]
     series: [{
-      // specific options for this series instance
       type: 'column',
       // data: [16099, 3120],
       data: [Number(peopleData['household_ordinary_m']), Number(peopleData['household_single_m'])],
-      // dataLabels: {
-      //           enabled: true
-      //       },
       name: '男性',
       stack: 'Europe',
       color: '#6948a2',
     },
     {
-      // specific options for this series instance
       type: 'column',
       // data: [16214, 3023],
       data: [Number(peopleData['household_ordinary_f']), Number(peopleData['household_single_f'])],
