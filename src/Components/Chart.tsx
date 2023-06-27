@@ -77,8 +77,8 @@ export const Chart: React.FC<IChartProps> = ({ peopleData,selectData}) => {
     ]
   }
   return (
-    <div  >
-      <HighchartsReact
+    <div   >
+      <HighchartsReact 
         highcharts={Highcharts}
         options={options}
       />

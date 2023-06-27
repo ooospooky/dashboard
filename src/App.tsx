@@ -3,6 +3,7 @@ import './App.scss';
 import { Form } from './Components/Form'
 import { Chart } from './Components/Chart';
 import { PieChart } from './Components/PieChart';
+import settingSVG  from './Assets/Vector.svg'
 // import FetchData from './Helper/FetchData'
 function App() {
   // interface IPeopleData {
@@ -22,7 +23,7 @@ function App() {
     <div className="App">
       <div className="navbar">
         <span>LOGO</span>
-        <span>LOGO</span>
+        <img className="navbar__setting" src={settingSVG} alt='setting' />
       </div>
       <div className='container'>
         <div className='brand'>
