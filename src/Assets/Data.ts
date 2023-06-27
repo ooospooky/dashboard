@@ -3,7 +3,7 @@ export const citydata = [
   '臺北市',
   '新北市',
   '桃園市',
-  '台中市',
+  '臺中市',
   
 ]
 interface Idistrictdata{
@@ -91,7 +91,7 @@ export const districtdata:Idistrictdata = {
     '西湖鄉',
     '卓蘭鎮',
   ],
-  '台中市': [
+  '臺中市': [
     '中區',
     '東區',
     '南區',

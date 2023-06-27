@@ -29,15 +29,13 @@ export const Form: FC<IFormProps> = ({ setPplData, setSelectData, setDidsubmit }
     const urlFetch = async () => {
       if (pattern.test(path)) {
         setDidsubmit(true)
-        console.log('yeeeeeee')
         const pathData = path.split("/").filter(Boolean);
-        console.log(pathData)
         setYear(pathData[0])
         setCity(pathData[1])
         setDistrict(pathData[2])
         
         const allData = await FetchData(pathData[0])
-        console.log('alldata', allData)
+        // console.log('alldata', allData)
         const doneData = await FilterData(allData, pathData[1], pathData[2]);
         setPplData(doneData);
         setSelectData([pathData[0], pathData[1], pathData[2]]);
@@ -55,7 +53,7 @@ export const Form: FC<IFormProps> = ({ setPplData, setSelectData, setDidsubmit }
     setDidsubmit(true)
     // setDidsubmit((prev: boolean) => !prev)
     const allData = await FetchData(year)
-    console.log('alldata', allData)
+    // console.log('alldata', allData)
     const doneData = await FilterData(allData, city, district);
     setPplData(doneData);
     setSelectData([year, city, district]);
