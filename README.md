@@ -9,7 +9,7 @@ React | Typescript | Scss | Highcharts | Firebase
 ```
 "proxy": "https://od.moi.gov.tw",
 ```
-但還是沒有解決，後來嘗試Firebase Cloud Function
+但還是沒有解決，後來嘗試Firebase Cloud Function仍然沒能解決
 ```
 // create HTTP Cloud Function
 exports.exampleFunction = functions.https.onRequest((request, response) => {
