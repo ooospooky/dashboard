@@ -22,15 +22,25 @@ const YearSelector:IYearSelect = {
   可避免cors
 */
 const FetchData=(year:string) =>{
+  let  allData:object[]= [];
     return( axios.get(`https://www.ris.gov.tw/rs-opendata/api/v1/datastore/ODRP019/${year}`)
-    .then((result) => {
-      console.log(result  )
-      return result.data.responseData;
+    .then(async(result) => {
+      allData = [...result.data.responseData]
+      for(let page = 2; page<=Number(result.data.totalPage); page++){
+        const pageData = await FetchPageData(year,page)
+        allData = [...allData,...pageData]
+      }
+      return allData;
     })
     .catch((error) => {
       console.log(error)
     })
   )
+}
+
+const FetchPageData = async (year:string,page:number)=>{
+    const res = await axios.get(`https://www.ris.gov.tw/rs-opendata/api/v1/datastore/ODRP019/${year}?page=${page}`)
+    return res.data.responseData
 }
 
 export default FetchData
