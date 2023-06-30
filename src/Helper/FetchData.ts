@@ -4,6 +4,7 @@ import axios from 'axios'
 interface IYearSelect {
   [key:string] : string
 }
+/*   Doc上的舊API，會遇到cors問題  https://data.gov.tw/dataset/14299
 const YearSelector:IYearSelect = {
   '111' : 'https://od.moi.gov.tw/api/v1/rest/datastore/301000000A-000082-053',
   '110' : 'https://od.moi.gov.tw/api/v1/rest/datastore/301000000A-000082-049',
@@ -14,11 +15,17 @@ const YearSelector:IYearSelect = {
   '105' : '	https://od.moi.gov.tw/api/v1/rest/datastore/301000000A-000082-008',
   '104' : 'https://od.moi.gov.tw/api/v1/rest/datastore/301000000A-000082-004'
 }
-
+*/
+/*
+  Doc更新，使用使API
+  https://www.ris.gov.tw/rs-opendata/api/v1/datastore/ODRP019/yyy(請指定年)
+  可避免cors
+*/
 const FetchData=(year:string) =>{
-  return( axios.get(YearSelector[year])
+    return( axios.get(`https://www.ris.gov.tw/rs-opendata/api/v1/datastore/ODRP019/${year}`)
     .then((result) => {
-      return result.data.result.records;
+      console.log(result  )
+      return result.data.responseData;
     })
     .catch((error) => {
       console.log(error)
