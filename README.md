@@ -4,7 +4,14 @@
 ## 🛠 Tools
 React | Typescript | Scss | Highcharts | Firebase
 
-## Issue
+## ~Issue~ Fixed
+6/30更新：
+
+Doc上的舊API，會遇到cors問題，平台在備註欄增加了新的API路徑https://www.ris.gov.tw/rs-opendata/api/v1/datastore/ODRP019/yyy
+即可避免cors
+
+---
+
 在fetch https://od.moi.gov.tw/api/v1/rest/datastore 時遇到CORS error，嘗試多種方式像在package.json中加入
 ```
 "proxy": "https://od.moi.gov.tw",
@@ -19,5 +26,6 @@ exports.exampleFunction = functions.https.onRequest((request, response) => {
   // 返回 JSON 
   response.json({ message: 'Hello from Cloud Functions!' });
 });
+
+
 ```
-目前還在解決中，若要開啟Project，要麻煩使用chrome擴充功能 <a href="https://chrome.google.com/webstore/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf">Allow CORS: Access-Control-Allow-Origin </a>並在頁面上開啟
