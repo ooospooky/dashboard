@@ -1,8 +1,8 @@
-import React, { useState,useCallback } from 'react'
+import React, { useState, useCallback } from 'react'
 import axios from 'axios'
 
 interface IYearSelect {
-  [key:string] : string
+  [key: string]: string
 }
 /*   Doc上的舊API，會遇到cors問題  https://data.gov.tw/dataset/14299
 const YearSelector:IYearSelect = {
@@ -21,26 +21,30 @@ const YearSelector:IYearSelect = {
   https://www.ris.gov.tw/rs-opendata/api/v1/datastore/ODRP019/yyy(請指定年)
   可避免cors
 */
-const FetchData=(year:string) =>{
-  let  allData:object[]= [];
-    return( axios.get(`https://www.ris.gov.tw/rs-opendata/api/v1/datastore/ODRP019/${year}`)
-    .then(async(result) => {
-      allData = [...result.data.responseData]
-      for(let page = 2; page<=Number(result.data.totalPage); page++){
-        const pageData = await FetchPageData(year,page)
-        allData = [...allData,...pageData]
-      }
-      return allData;
-    })
-    .catch((error) => {
-      console.log(error)
-    })
-  )
-}
 
-const FetchPageData = async (year:string,page:number)=>{
-    const res = await axios.get(`https://www.ris.gov.tw/rs-opendata/api/v1/datastore/ODRP019/${year}?page=${page}`)
-    return res.data.responseData
+const FetchData = async (year: string) => {
+  let allData: object[] = [];
+
+  try {
+    const result = await axios.get(`https://www.ris.gov.tw/rs-opendata/api/v1/datastore/ODRP019/${year}`);
+    allData = [...result.data.responseData];
+
+    for (let page = 2; page <= Number(result.data.totalPage); page++) {
+      const pageData = await FetchPageData(year, page);
+      allData = [...allData, ...pageData];
+    }
+
+    return allData;
+  }
+  catch (error) {
+    console.log(error);
+    return []; // Return an empty array or handle the error accordingly
+  }
+};
+
+const FetchPageData = async (year: string, page: number) => {
+  const res = await axios.get(`https://www.ris.gov.tw/rs-opendata/api/v1/datastore/ODRP019/${year}?page=${page}`)
+  return res.data.responseData
 }
 
 export default FetchData
