@@ -1,4 +1,4 @@
-import React, { useState, useCallback,useEffect, FC } from 'react'
+import React, { useState, useCallback, useEffect, FC } from 'react'
 import './Form.scss'
 import axios from 'axios'
 import { yeardata, citydata, districtdata } from '../Assets/Data'
@@ -19,8 +19,8 @@ export const Form: FC<IFormProps> = ({ setPplData, setSelectData, setDidsubmit }
   const [year, setYear] = useState<string>('111');
   const [city, setCity] = useState<string>('');
   const [district, setDistrict] = useState<string>('');
-  
-  const pattern = /^\/\d{3}\/[\u4e00-\u9fa5]{3}\/[\u4e00-\u9fa5]{3}$/; 
+
+  const pattern = /^\/\d{3}\/[\u4e00-\u9fa5]{3}\/[\u4e00-\u9fa5]{3}$/;
   const path = decodeURIComponent(window.location.pathname)
   useEffect(() => {
     const urlFetch = async () => {
@@ -30,7 +30,7 @@ export const Form: FC<IFormProps> = ({ setPplData, setSelectData, setDidsubmit }
         setYear(pathData[0])
         setCity(pathData[1])
         setDistrict(pathData[2])
-        
+
         const allData = await FetchData(pathData[0])
         const doneData = await FilterData(allData, pathData[1], pathData[2]);
         setPplData(doneData);
@@ -50,8 +50,8 @@ export const Form: FC<IFormProps> = ({ setPplData, setSelectData, setDidsubmit }
     setPplData(doneData);
     setSelectData([year, city, district]);
   }
-  const changeArea = async (e: string) => {
-    await setCity(e);
+  const changeArea = (e: string) => {
+    setCity(e);
     setDistrict(districtdata[e][0]);
   }
   return (
